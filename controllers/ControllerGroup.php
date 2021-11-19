@@ -5,18 +5,18 @@
         public function defaultAction() {
             $modelGroup = new Group();
 
-            View::display('/group/form', array());    
-            View::display('/group/view', array('listEleve' => $modelGroup->getGroup()));    
+            View::display('/group/form', array());
+            View::display('/group/view', array('listEleve' => $modelGroup->getGroup()));
         }
 
         public function formAction() {
             $modelGroup = new Group();
 
-            View::display('/group/load', array());    
+            View::display('/group/load', array());
         }
 
         public function globalAction() {
-            if(isset($_POST['listEleve'])) {
+            if(isset($_FILES['listEleve'])) {
                 $file = file_get_contents($_FILES["listEleve"]["tmp_name"]);
                 file_put_contents(Constants::getDirRoot() . '/Liste_Eleves.csv', $file);
             }
@@ -29,7 +29,7 @@
         }
 
         public function loadFileAction() {
-            
+
             $file = file_get_contents($_FILES["listEleve"]["tmp_name"]);
             file_put_contents(Constants::getDirRoot() . '/Liste_Eleves.csv', $file);
 
@@ -40,7 +40,7 @@
         public function displayAction() {
             $modelGroup = new Group();
 
-            View::display('/group/view', array('listEleve' => $modelGroup->getGroup()));    
+            View::display('/group/view', array('listEleve' => $modelGroup->getGroup()));
         }
 
         public function generateAction($params) {
@@ -50,7 +50,7 @@
             }
             $groups = $modelGroup->generateGroups(($params ? $params : 4));
 
-            View::display('/group/generate', array());  
-            View::display('/group/groups', array('groups' => $groups)); 
+            View::display('/group/generate', array());
+            View::display('/group/groups', array('groups' => $groups));
         }
     }
